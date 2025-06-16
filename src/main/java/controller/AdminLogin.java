@@ -11,21 +11,21 @@ public class AdminLogin {
     private Button btnLogin;
 
     @FXML
-    private JFXTextField txtEmail;
+    private JFXTextField txtEmail1;
 
     @FXML
-    private JFXTextField txtPassword;
+    private JFXTextField txtPassword1;
 
     @FXML
     private Button txtSignUp;
 
     @FXML
-    void BtnLoginOnAction(ActionEvent event) {
+    void BtnLoginOnAction1(ActionEvent event) {
 
     }
 
     @FXML
-    void BtnSignUpOnAction(ActionEvent event) {
+    void BtnSignUpOnAction1(ActionEvent event) {
 
     }
 

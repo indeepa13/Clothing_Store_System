@@ -7,8 +7,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AdminLogin">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#033565" height="60.0" layoutX="-6.0" layoutY="28.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="600.0" />
       <Label layoutX="166.0" layoutY="36.0" text="Admin Login" textFill="WHITE">
@@ -16,9 +15,10 @@
             <Font name="System Bold" size="25.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txtEmail" layoutX="31.0" layoutY="142.0" text="Email" />
-      <JFXTextField fx:id="txtPassword" layoutX="37.0" layoutY="214.0" text="Password" />
-      <Button fx:id="btnLogin" layoutX="134.0" layoutY="300.0" mnemonicParsing="false" onAction="#BtnLoginOnAction" prefHeight="25.0" prefWidth="135.0" text="Login" />
-      <Button fx:id="txtSignUp" layoutX="386.0" layoutY="300.0" mnemonicParsing="false" onAction="#BtnSignUpOnAction" prefHeight="25.0" prefWidth="135.0" text="SignUp" />
+      <JFXTextField fx:id="txtEmail1" layoutX="31.0" layoutY="142.0" text="Email" />
+      <JFXTextField fx:id="txtPassword1" layoutX="37.0" layoutY="214.0" text="Password" />
+      <Button fx:id="btnLogin" layoutX="134.0" layoutY="300.0" mnemonicParsing="false" onAction="#BtnLoginOnAction1" prefHeight="25.0" prefWidth="135.0" text="Login" />
+      <Button fx:id="txtSignUp" layoutX="386.0" layoutY="300.0" mnemonicParsing="false" onAction="#BtnSignUpOnAction1" prefHeight="25.0" prefWidth="135.0" text="SignUp" />
+      <Label layoutX="464.0" layoutY="95.0" text="admin" />
    </children>
 </Pane>

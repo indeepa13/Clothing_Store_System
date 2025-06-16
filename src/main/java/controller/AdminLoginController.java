@@ -1,12 +1,13 @@
 package controller;
 
 import com.jfoenix.controls.JFXTextField;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 
-public class ClothingStoreController {
+public class AdminLoginController {
 
     @FXML
     private ChoiceBox choiCategory;
@@ -43,6 +44,9 @@ public class ClothingStoreController {
 
     @FXML
     void UpdateClickOnAction(ActionEvent event) {
+
+    }
+    private void loadTable(){
 
     }
 

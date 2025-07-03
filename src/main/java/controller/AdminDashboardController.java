@@ -1,13 +1,12 @@
 package controller;
 
 import com.jfoenix.controls.JFXTextField;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 
-public class AdminLoginController {
+public class AdminDashboardController {
 
     @FXML
     private ChoiceBox choiCategory;

@@ -38,7 +38,7 @@ public class DashBoardController {
     @FXML
     void btnEmployeeLogOnAction(ActionEvent event ) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("/view/admin_login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/employee_login.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.setTitle("Admin Login");

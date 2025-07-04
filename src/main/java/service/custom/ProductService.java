@@ -1,16 +1,17 @@
 package service.custom;
 
-import model.dto.Product;
+import model.dto.ProductDTO;
+import model.dto.ProductDTO;
 import service.SuperService;
 
 import java.util.List;
 
 public interface ProductService extends SuperService {
-    List<Product> getAll();
+    List<ProductDTO> getAll();
 
-  public   void save(Product product);
+  public   void save(ProductDTO product);
 
-    void update(Product selected);
+    void update(ProductDTO selected);
 
-    void delete(Product selected);
+    void delete(ProductDTO selected);
 }

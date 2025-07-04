@@ -6,8 +6,6 @@ import service.custom.impl.ProductServiceImpl;
 import service.custom.impl.UserServiceImpl;
 import util.ServiceType;
 
-import static org.apache.poi.ss.formula.functions.AggregateFunction.PRODUCT;
-import static sun.net.ftp.FtpDirEntry.Permission.USER;
 
 public class ServiceFactory {
     private static ServiceFactory instance;

@@ -4,13 +4,16 @@ package controller;
 import db.DBConnection;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.view.JasperViewer;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class AdminDashboardController {
+public class AdminDashboardController implements Initializable {
     @FXML
     private AnchorPane contentArea;
 
@@ -35,4 +38,8 @@ public class AdminDashboardController {
     }
 
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
 }

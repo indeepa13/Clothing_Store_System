@@ -7,6 +7,7 @@ import repository.DaoFactory;
 import repository.custom.EmployeeDAO;
 
 import service.custom.EmployeeService;
+import util.RepositoryType;
 
 
 import java.sql.SQLException;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeServiceImpl implements EmployeeService {
-    private Object RepositoryType;
+
     EmployeeDAO employeeDAO = DaoFactory.getInstance().getRepositoryType(RepositoryType.EMPLOYEE);
 
     @Override

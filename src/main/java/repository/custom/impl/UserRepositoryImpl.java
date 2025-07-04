@@ -2,7 +2,7 @@ package repository.custom.impl;
 
 import model.entity.EmployeeEntity;
 import repository.custom.UserDAO;
-import util.CRUDUtil;
+import util.CrudUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,7 +26,7 @@ public class UserRepositoryImpl implements UserDAO {
 
     @Override
     public EmployeeEntity searchById(String s) throws SQLException {
-        ResultSet resultSet = CRUDUtil.execute("SELECT * FROM user WHERE email = ? AND user_type = 'ADMIN'", s);
+        ResultSet resultSet = CrudUtil.execute("SELECT * FROM user WHERE email = ? AND user_type = 'ADMIN'", s);
         if (resultSet.next())
             return new EmployeeEntity(
                     resultSet.getString("user_id"),

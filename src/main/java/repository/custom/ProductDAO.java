@@ -1,4 +1,14 @@
-package repository.custom;
-
-public interface ProductDAO {
-}
+//package repository.custom;
+//
+//import model.dto.Product;
+//import model.entity.EmployeeEntity;
+//import repository.CrudRepository;
+//
+//import java.util.List;
+//
+//public interface ProductDAO extends CrudRepository<EmployeeEntity,String> {
+//    void save(Product product);
+//    void update(Product product);
+//    void delete(Product product);
+//    List<Product> findAll();
+//}

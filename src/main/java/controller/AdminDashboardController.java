@@ -1,54 +1,38 @@
 package controller;
 
-import com.jfoenix.controls.JFXTextField;
-import javafx.event.ActionEvent;
+
+import db.DBConnection;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TableColumn;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.AnchorPane;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.view.JasperViewer;
+
+import java.io.IOException;
 
 public class AdminDashboardController {
+    @FXML
+    private AnchorPane contentArea;
 
     @FXML
-    private ChoiceBox choiCategory;
-
-    @FXML
-    private TableColumn colCategory;
-
-    @FXML
-    private TableColumn colEmployee;
-
-    @FXML
-    private TableColumn colProduct;
-
-    @FXML
-    private JFXTextField txtEmployee;
-
-    @FXML
-    private JFXTextField txtProduct;
-
-    @FXML
-    void AddClickOnActon(ActionEvent event) {
-
+    private void openProductView() throws IOException {
+        AnchorPane view = FXMLLoader.load(getClass().getResource("/view/product_view.fxml"));
+        contentArea.getChildren().setAll(view);
+    }
+    public void showEmployees() throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/view/employee_view.fxml"));
+        contentArea.getChildren().setAll(pane);
     }
 
-    @FXML
-    void DeleteClickOnAction(ActionEvent event) {
-
+    public void showSuppliers() throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/view/supplier_view.fxml"));
+        contentArea.getChildren().setAll(pane);
     }
-
-    @FXML
-    void SearchOnClickAction(ActionEvent event) {
-
+    public void generateSalesReport() throws JRException {
+        JasperReport report = JasperCompileManager.compileReport("src/main/resources/reports/sales_report.jrxml");
+        JasperPrint print = JasperFillManager.fillReport(report, null, DBConnection.getConnection());
+        JasperViewer.viewReport(print, false);
     }
-
-    @FXML
-    void UpdateClickOnAction(ActionEvent event) {
-
-    }
-    private void loadTable(){
-
-    }
-
 
 
 }

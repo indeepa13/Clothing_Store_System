@@ -47,7 +47,7 @@ public class  AdminLogin {
             stage.setTitle("Admin Dashboard");
             stage.show();
         } else {
-            new Alert(Alert.AlertType.ERROR, "Invalid credentials!").show();
+            new Alert(Alert.AlertType.INFORMATION, "Invalid credentials!").show();
         }
     }
 

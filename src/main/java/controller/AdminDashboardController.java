@@ -2,6 +2,7 @@ package controller;
 
 
 import db.DBConnection;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -41,5 +42,44 @@ public class AdminDashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+    }
+
+    public void handleBrowseImage(ActionEvent event) {
+    }
+
+    public void handleAddProduct(ActionEvent event) {
+    }
+
+    public void handleUpdateProduct(ActionEvent event) {
+    }
+
+    public void handleDeleteProduct(ActionEvent event) {
+    }
+
+    public void handleClearForm(ActionEvent event) {
+    }
+
+    public void handleAddSupplier(ActionEvent event) {
+    }
+
+    public void handleUpdateSupplier(ActionEvent event) {
+    }
+
+    public void handleClearSupplierForm(ActionEvent event) {
+    }
+
+    public void handleDeleteSupplier(ActionEvent event) {
+    }
+
+    public void handleAddEmployee(ActionEvent event) {
+    }
+
+    public void handleUpdateEmployee(ActionEvent event) {
+    }
+
+    public void handleDeleteEmployee(ActionEvent event) {
+    }
+
+    public void handleClearEmployeeForm(ActionEvent event) {
     }
 }

@@ -1,5 +1,161 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.Pane?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="622.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AdminDashboardController" />
+<AnchorPane prefHeight="600.0" prefWidth="1000.0"
+            xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.AdminDashboardController"
+            style="-fx-background-color: linear-gradient(to right, #f8f8f8, #ffffff);">
+
+    <children>
+        <TabPane layoutX="20.0" layoutY="20.0" prefHeight="560.0" prefWidth="960.0" tabClosingPolicy="UNAVAILABLE"
+                 style="-fx-tab-min-width: 160; -fx-tab-max-width: 160; -fx-font-size: 14px;">
+            <tabs>
+
+                <!-- Admin Tab -->
+                <Tab text="Admin Profile">
+                    <content>
+                        <AnchorPane style="-fx-background-color: white; -fx-padding: 20;">
+                            <children>
+                                <VBox spacing="10" layoutX="30" layoutY="30">
+                                    <HBox spacing="10">
+                                        <Label text="ID:" style="-fx-font-weight: bold;"/>
+                                        <JFXTextField fx:id="adminId" promptText="Admin ID"/>
+                                    </HBox>
+                                    <HBox spacing="10">
+                                        <Label text="Name:" style="-fx-font-weight: bold;"/>
+                                        <JFXTextField fx:id="adminName" promptText="Admin Name"/>
+                                    </HBox>
+                                    <HBox spacing="10">
+                                        <Label text="Email:" style="-fx-font-weight: bold;"/>
+                                        <JFXTextField fx:id="adminEmail" promptText="Email"/>
+                                    </HBox>
+                                    <HBox spacing="10">
+                                        <Label text="Password:" style="-fx-font-weight: bold;"/>
+                                        <JFXPasswordField fx:id="adminPassword" promptText="Password"/>
+                                    </HBox>
+                                    <HBox spacing="10">
+                                        <Label text="Confirm Password:" style="-fx-font-weight: bold;"/>
+                                        <JFXPasswordField fx:id="adminConfirmPassword" promptText="Confirm Password"/>
+                                    </HBox>
+                                    <JFXButton text="Update Profile" style="-fx-background-color: #007bff; -fx-text-fill: white;"/>
+                                </VBox>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+
+                <!-- Product Management Tab -->
+                <Tab text="Product Management">
+                    <content>
+                        <AnchorPane style="-fx-background-color: white; -fx-padding: 20;">
+                            <children>
+                                <VBox spacing="10" layoutX="20" layoutY="20" prefWidth="300">
+                                    <JFXTextField fx:id="txtName" promptText="Product Name"/>
+                                    <JFXTextField fx:id="txtCategory" promptText="Category"/>
+                                    <JFXTextField fx:id="txtColor" promptText="Color"/>
+                                    <JFXTextField fx:id="txtSize" promptText="Size"/>
+                                    <JFXTextField fx:id="txtQty" promptText="Quantity"/>
+                                    <JFXTextField fx:id="txtCostPrice" promptText="Cost Price"/>
+                                    <JFXTextField fx:id="txtSellingPrice" promptText="Selling Price"/>
+                                    <JFXTextField fx:id="txtSupplier" promptText="Supplier"/>
+                                    <JFXTextField fx:id="txtAddedDate" promptText="Added Date (YYYY-MM-DD)"/>
+                                    <JFXTextArea fx:id="txtDescription" promptText="Description" prefHeight="60"/>
+                                    <HBox spacing="10">
+                                        <JFXTextField fx:id="txtImagePath" promptText="Image Path"/>
+                                        <JFXButton text="Browse" onAction="#handleBrowseImage" style="-fx-background-color: #6c757d; -fx-text-fill: white;"/>
+                                    </HBox>
+                                    <HBox spacing="10">
+                                        <JFXButton text="Add" onAction="#handleAddProduct" style="-fx-background-color: #28a745; -fx-text-fill: white;"/>
+                                        <JFXButton text="Update" onAction="#handleUpdateProduct" style="-fx-background-color: #ffc107; -fx-text-fill: black;"/>
+                                        <JFXButton text="Delete" onAction="#handleDeleteProduct" style="-fx-background-color: #dc3545; -fx-text-fill: white;"/>
+                                        <JFXButton text="Clear" onAction="#handleClearForm" style="-fx-background-color: #17a2b8; -fx-text-fill: white;"/>
+                                    </HBox>
+                                </VBox>
+                                <TableView fx:id="tblProducts" layoutX="350" layoutY="20" prefWidth="590" prefHeight="520">
+                                    <columns>
+                                        <TableColumn fx:id="colId" text="ID" prefWidth="80"/>
+                                        <TableColumn fx:id="colName" text="Name" prefWidth="100"/>
+                                        <TableColumn fx:id="colCategory" text="Category" prefWidth="80"/>
+                                        <TableColumn fx:id="colQty" text="Qty" prefWidth="60"/>
+                                        <TableColumn fx:id="colCostPrice" text="Cost" prefWidth="80"/>
+                                        <TableColumn fx:id="colSellingPrice" text="Price" prefWidth="80"/>
+                                        <TableColumn fx:id="colSupplier" text="Supplier" prefWidth="100"/>
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+
+                <!-- Employee Management Tab -->
+                <Tab text="Employee Management">
+                    <content>
+                        <AnchorPane style="-fx-background-color: white; -fx-padding: 20;">
+                            <children>
+                                <VBox spacing="10" layoutX="20" layoutY="20" prefWidth="300">
+                                    <JFXTextField fx:id="empId" promptText="Employee ID"/>
+                                    <JFXTextField fx:id="empName" promptText="Name"/>
+                                    <JFXTextField fx:id="empEmail" promptText="Email"/>
+                                    <JFXPasswordField fx:id="empPassword" promptText="Password"/>
+                                    <JFXTextField fx:id="empRole" promptText="Role (e.g., ADMIN/EMPLOYEE)"/>
+                                    <HBox spacing="10">
+                                        <JFXButton text="Add" onAction="#handleAddEmployee" style="-fx-background-color: #28a745; -fx-text-fill: white;"/>
+                                        <JFXButton text="Update" onAction="#handleUpdateEmployee" style="-fx-background-color: #ffc107; -fx-text-fill: black;"/>
+                                        <JFXButton text="Delete" onAction="#handleDeleteEmployee" style="-fx-background-color: #dc3545; -fx-text-fill: white;"/>
+                                        <JFXButton text="Clear" onAction="#handleClearEmployeeForm" style="-fx-background-color: #17a2b8; -fx-text-fill: white;"/>
+                                    </HBox>
+                                </VBox>
+                                <TableView fx:id="tblEmployees" layoutX="350" layoutY="20" prefWidth="590" prefHeight="520">
+                                    <columns>
+                                        <TableColumn fx:id="empColId" text="ID" prefWidth="80"/>
+                                        <TableColumn fx:id="empColName" text="Name" prefWidth="100"/>
+                                        <TableColumn fx:id="empColEmail" text="Email" prefWidth="150"/>
+                                        <TableColumn fx:id="empColRole" text="Role" prefWidth="100"/>
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+
+                <!-- Supplier Management Tab -->
+                <Tab text="Supplier Management">
+                    <content>
+                        <AnchorPane style="-fx-background-color: white; -fx-padding: 20;">
+                            <children>
+                                <VBox spacing="10" layoutX="20" layoutY="20" prefWidth="300">
+                                    <JFXTextField fx:id="supId" promptText="Supplier ID"/>
+                                    <JFXTextField fx:id="supName" promptText="Name"/>
+                                    <JFXTextField fx:id="supCompany" promptText="Company"/>
+                                    <JFXTextField fx:id="supEmail" promptText="Email"/>
+                                    <JFXTextField fx:id="supContact" promptText="Contact"/>
+                                    <HBox spacing="10">
+                                        <JFXButton text="Add" onAction="#handleAddSupplier" style="-fx-background-color: #28a745; -fx-text-fill: white;"/>
+                                        <JFXButton text="Update" onAction="#handleUpdateSupplier" style="-fx-background-color: #ffc107; -fx-text-fill: black;"/>
+                                        <JFXButton text="Delete" onAction="#handleDeleteSupplier" style="-fx-background-color: #dc3545; -fx-text-fill: white;"/>
+                                        <JFXButton text="Clear" onAction="#handleClearSupplierForm" style="-fx-background-color: #17a2b8; -fx-text-fill: white;"/>
+                                    </HBox>
+                                </VBox>
+                                <TableView fx:id="tblSuppliers" layoutX="350" layoutY="20" prefWidth="590" prefHeight="520">
+                                    <columns>
+                                        <TableColumn fx:id="supColId" text="ID" prefWidth="80"/>
+                                        <TableColumn fx:id="supColName" text="Name" prefWidth="120"/>
+                                        <TableColumn fx:id="supColCompany" text="Company" prefWidth="150"/>
+                                        <TableColumn fx:id="supColEmail" text="Email" prefWidth="150"/>
+                                        <TableColumn fx:id="supColContact" text="Contact" prefWidth="100"/>
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+
+            </tabs>
+        </TabPane>
+    </children>
+</AnchorPane>

@@ -34,7 +34,7 @@ public class  AdminLogin {
     }
 
     @FXML
-    void BtnLoginOnAction1(ActionEvent event) throws IOException {
+    public void BtnLoginOnAction1(ActionEvent event) throws IOException {
 
         String email = txtEmail1.getText();
         String password = txtPassword01.getText();
@@ -47,7 +47,7 @@ public class  AdminLogin {
             stage.setTitle("Admin Dashboard");
             stage.show();
         } else {
-            new Alert(Alert.AlertType.INFORMATION, "Invalid credentials!").show();
+            new Alert(Alert.AlertType.ERROR, "Invalid credentials!").show();
         }
     }
 

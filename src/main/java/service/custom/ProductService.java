@@ -13,5 +13,7 @@ public interface ProductService extends SuperService {
 
     void update(ProductDTO selected);
 
-    void delete(ProductDTO selected);
+
+
+    void delete(String id);
 }

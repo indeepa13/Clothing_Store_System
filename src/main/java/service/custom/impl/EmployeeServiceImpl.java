@@ -3,47 +3,38 @@ package service.custom.impl;
 import model.dto.EmployeeDTO;
 import model.entity.EmployeeEntity;
 import org.modelmapper.ModelMapper;
-import repository.DaoFactory;
 import repository.custom.EmployeeDAO;
-
+import repository.custom.impl.EmployeeRepositoryImpl;
+import repository.custom.impl.EmployeeRepositoryImpl;
 import service.custom.EmployeeService;
-import util.RepositoryType;
 
-
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class EmployeeServiceImpl implements EmployeeService {
 
-    EmployeeDAO employeeDAO = DaoFactory.getInstance().getRepositoryType(RepositoryType.EMPLOYEE);
+    private final EmployeeDAO employeeDAO = new EmployeeRepositoryImpl();
+    private final ModelMapper mapper = new ModelMapper();
 
     @Override
-    public EmployeeDTO loginUser(String username, String password) throws SQLException {
+    public void save(EmployeeDTO dto) {
+        employeeDAO.save(mapper.map(dto, EmployeeEntity.class));
+    }
 
-        EmployeeEntity employeeEntity = employeeDAO.searchById(username);
-        EmployeeDTO employeeDTO = new ModelMapper().map(employeeEntity, EmployeeDTO.class);
-        if (employeeDTO.getPassword().equals(password)){
-            return employeeDTO;
-        }
-        return null;
+    @Override
+    public void update(EmployeeDTO dto) {
+        employeeDAO.update(mapper.map(dto, EmployeeEntity.class));
+    }
 
-
+    @Override
+    public void delete(String id) {
+        employeeDAO.deleteById(id);
     }
 
     @Override
     public List<EmployeeDTO> getAll() {
-        List<EmployeeEntity> all = employeeDAO.getAll();
-        List<EmployeeDTO> list = new ArrayList<>();
-        all.forEach(employeeEntity -> {
-            list.add(new ModelMapper().map(employeeEntity, EmployeeDTO.class));
-        });
-        return  list;
-    }
-
-    @Override
-    public Boolean add(EmployeeDTO employee) {
-        EmployeeEntity mapped = new ModelMapper().map(employee, EmployeeEntity.class);
-        return employeeDAO.add(mapped);
+        return employeeDAO.findAll().stream()
+                .map(entity -> mapper.map(entity, EmployeeDTO.class))
+                .collect(Collectors.toList());
     }
 }

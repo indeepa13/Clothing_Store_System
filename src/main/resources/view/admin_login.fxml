@@ -25,7 +25,7 @@
       </Label>
       <JFXTextField fx:id="txtEmail1" layoutX="42.0" layoutY="143.0" prefHeight="25.0" prefWidth="212.0" text="Email" />
       <Button fx:id="btnLogin" layoutX="134.0" layoutY="300.0" mnemonicParsing="false" onAction="#BtnLoginOnAction1" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: #007bff; -fx-text-fill: white;" text="Login" />
-      <Button fx:id="txtSignUp" layoutX="386.0" layoutY="300.0" mnemonicParsing="false" onAction="#BtnSignUpOnAction1" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: #007bff; -fx-text-fill: white;" text="SignUp" />
+      <Button fx:id="btnSignUp" layoutX="386.0" layoutY="300.0" mnemonicParsing="false" onAction="#BtnSignUpOnAction1" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: #007bff; -fx-text-fill: white;" text="SignUp" />
       <Label layoutX="464.0" layoutY="95.0" text="admin" />
       <JFXPasswordField fx:id="txtPassword01" layoutX="42.0" layoutY="219.0" prefHeight="25.0" prefWidth="212.0" />
    </children>

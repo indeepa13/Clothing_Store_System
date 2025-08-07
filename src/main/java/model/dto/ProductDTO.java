@@ -25,5 +25,5 @@ public class ProductDTO {
     private String description;
 
 
-
-}
+    public void setPrice(String price) {
+    }}

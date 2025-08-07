@@ -14,9 +14,8 @@ public interface EmployeeService extends SuperService {
 //
 //    Employee searchById(String id);
 
-    EmployeeDTO loginUser(String username, String password) throws SQLException;
-
+    void save(EmployeeDTO dto);
+    void update(EmployeeDTO dto);
+    void delete(String id);
     List<EmployeeDTO> getAll();
-
-    Boolean add(EmployeeDTO employee);
 }

@@ -12,10 +12,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import model.dto.EmployeeDTO;
-import service.ServiceFactory;
-import service.custom.EmployeeService;
-import util.ServiceType;
 
 import java.io.IOException;
 import java.net.URL;
@@ -39,11 +35,9 @@ public class  AdminLogin implements Initializable {
     public AdminLogin() {
       //  this.txtPassword1 = txtPassword1;
     }
-    EmployeeService employeeService = ServiceFactory.getInstance().getServiceType(ServiceType.EMPLOYEE);
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        employeeService.save(new EmployeeDTO(1000, "Admin", "admin@clothify.com", "admin123", "ADMIN"));
     }
     @FXML
     public void BtnLoginOnAction1(ActionEvent event) throws IOException {
@@ -51,9 +45,8 @@ public class  AdminLogin implements Initializable {
         String email = txtEmail1.getText();
         String password = txtPassword01.getText();
 
-        EmployeeDTO employeeDTO = employeeService.searchByUsername(email);
-
-        if (employeeDTO.getPassword().equals(password)) {
+        // Temporary hardcoded login check
+        if (email.equals("admin@clothify.com") && password.equals("admin123")) {
             Parent root = FXMLLoader.load(getClass().getResource("/view/admin_dashboard.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));

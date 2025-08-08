@@ -7,13 +7,13 @@ import org.hibernate.query.Query;
 import repository.custom.ProductDAO;
 import util.HibernateUtil;
 
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.List;
 
 public class ProductRepositoryImpl implements ProductDAO {
 
     @Override
-    public boolean save(ProductEntity entity) {
+    public boolean add(ProductEntity entity) {
         try (Session session = HibernateUtil.getSession()) {
             Transaction transaction = session.beginTransaction();
             session.save(entity);
@@ -44,30 +44,41 @@ public class ProductRepositoryImpl implements ProductDAO {
     }
 
     @Override
-    public ProductEntity searchById(Integer id) {
-        try (Session session = HibernateUtil.getSession()) {
-            return session.get(ProductEntity.class, id);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+    public ProductEntity searchById(String s) throws SQLException {
+        return null;
     }
 
-
-
+//    @Override
+//    public boolean deleteById(Integer id) {
+//        try (Session session = HibernateUtil.getSession()) {
+//            Transaction transaction = session.beginTransaction();
+//            ProductEntity product = session.get(ProductEntity.class, id);
+//            if (product != null) {
+//                session.delete(product);
+//                transaction.commit();
+//                return true;
+//            }
+//            return false;
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return false;
+//        }
+//    }
+//
+//    @Override
+//    public ProductEntity searchById(Integer id) {
+//        try (Session session = HibernateUtil.getSession()) {
+//            return session.get(ProductEntity.class, id);
+//        }
+//    }
 
     @Override
     public List<ProductEntity> getAll() {
         try (Session session = HibernateUtil.getSession()) {
-            Query<ProductEntity> query =
-                    session.createQuery("FROM ProductEntity", ProductEntity.class);
+            Query<ProductEntity> query = session.createQuery("FROM ProductEntity", ProductEntity.class);
             return query.getResultList();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ArrayList<>();
         }
     }
-
 
 //    @Override
 //    public Integer getLastID() {
@@ -93,29 +104,5 @@ public class ProductRepositoryImpl implements ProductDAO {
 //            e.printStackTrace();
 //            return false;
 //        }
-
-    //    @Override
-//    public boolean deleteById(Integer id) {
-//        try (Session session = HibernateUtil.getSession()) {
-//            Transaction transaction = session.beginTransaction();
-//            ProductEntity product = session.get(ProductEntity.class, id);
-//            if (product != null) {
-//                session.delete(product);
-//                transaction.commit();
-//                return true;
-//            }
-//            return false;
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return false;
-//        }
-//    }
-//
-//    @Override
-//    public ProductEntity searchById(Integer id) {
-//        try (Session session = HibernateUtil.getSession()) {
-//            return session.get(ProductEntity.class, id);
-//        }
-//    }
     }
 

@@ -11,7 +11,6 @@ import lombok.Setter;
 @Getter
 public class EmployeeDTO {
     private Integer id;
-
     private String name;
     private String email;
     private String password;

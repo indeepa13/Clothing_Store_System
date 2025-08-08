@@ -4,6 +4,7 @@ package service.custom;
 import model.dto.EmployeeDTO;
 import service.SuperService;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface EmployeeService extends SuperService {
@@ -11,10 +12,10 @@ public interface EmployeeService extends SuperService {
 //
 //    Boolean updateEmployee(Employee employee);
 //
-    EmployeeDTO searchById(Integer id);
+//    Employee searchById(String id);
+
     void save(EmployeeDTO dto);
     void update(EmployeeDTO dto);
     void delete(String id);
     List<EmployeeDTO> getAll();
-    EmployeeDTO searchByUsername(String username);
 }

@@ -87,7 +87,7 @@ public class ProductController {
     private void deleteProduct() {
         ProductDTO selected = tblProducts.getSelectionModel().getSelectedItem();
         if (selected != null) {
-            productService.delete(String.valueOf(selected.getId()));
+            productService.delete(selected.getId());
             tblProducts.getItems().remove(selected);
             txtName.clear();
             txtPrice.clear();

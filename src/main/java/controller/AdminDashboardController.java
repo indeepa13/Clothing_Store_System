@@ -197,7 +197,6 @@ public class AdminDashboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
     }
 
     // --- Image Browse Placeholder ---
@@ -248,11 +247,10 @@ public class AdminDashboardController implements Initializable {
 
     // --- Employee Management Placeholder Methods ---
     public void handleAddEmployee(ActionEvent event) {
-        EmployeeDTO dto = new EmployeeDTO(1000, "John Doe", "john@example.com", "1234", "EMPLOYEE");
+        EmployeeDTO dto = new EmployeeDTO("EMP001", "John Doe", "john@example.com", "1234", "EMPLOYEE");
         employeeService.save(dto);
         new Alert(Alert.AlertType.INFORMATION, "Employee added successfully").show();
     }
-
 
     public void handleUpdateEmployee(ActionEvent event) {
         new Alert(Alert.AlertType.INFORMATION, "Update Employee functionality pending").show();

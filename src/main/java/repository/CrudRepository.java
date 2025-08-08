@@ -4,9 +4,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface CrudRepository<T,ID> extends SuperRepository{
-    boolean save(T entity);
+    boolean add(T entity);
     boolean update(T entity);
     boolean deleteById(ID id);
-    T searchById(Integer id) throws SQLException;
+    T searchById(ID id) throws SQLException;
     List<T> getAll();
 }

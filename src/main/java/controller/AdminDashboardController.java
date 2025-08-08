@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
@@ -22,13 +23,17 @@ import service.SuperService;
 import service.custom.ProductService;
 import service.custom.impl.EmployeeServiceImpl;
 import util.ServiceType;
+import util.Session;
 //import service.custom.impl.SupplierServiceImpl;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ResourceBundle;
 
 public class AdminDashboardController implements Initializable {
+    public DatePicker txtAddedDate;
     @FXML
     private JFXPasswordField adminConfirmPassword;
 
@@ -131,8 +136,7 @@ public class AdminDashboardController implements Initializable {
     @FXML
     private TableView tblSuppliers;
 
-    @FXML
-    private JFXTextField txtAddedDate;
+   
 
     @FXML
     private JFXTextField txtCategory;
@@ -169,25 +173,26 @@ public class AdminDashboardController implements Initializable {
     @FXML
     private AnchorPane contentArea;
 
+    EmployeeDTO currentUser = Session.getInstance().getCurrentUser();
     private final EmployeeServiceImpl employeeService = new EmployeeServiceImpl();
    // private final SupplierServiceImpl supplierService = new SupplierServiceImpl();
-    ProductService service = ServiceFactory.getInstance().getServiceType(ServiceType.PRODUCT);
+    ProductService productService = ServiceFactory.getInstance().getServiceType(ServiceType.PRODUCT);
 
-    @FXML
-    private void openProductView() throws IOException {
-        AnchorPane view = FXMLLoader.load(getClass().getResource("/view/product_view.fxml"));
-        contentArea.getChildren().setAll(view);
-    }
-
-    public void showEmployees() throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/view/employee_view.fxml"));
-        contentArea.getChildren().setAll(pane);
-    }
-
-    public void showSuppliers() throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/view/supplier_view.fxml"));
-        contentArea.getChildren().setAll(pane);
-    }
+//    @FXML
+//    private void openProductView() throws IOException {
+//        AnchorPane view = FXMLLoader.load(getClass().getResource("/view/product_view.fxml"));
+//        contentArea.getChildren().setAll(view);
+//    }
+//
+//    public void showEmployees() throws IOException {
+//        AnchorPane pane = FXMLLoader.load(getClass().getResource("/view/employee_view.fxml"));
+//        contentArea.getChildren().setAll(pane);
+//    }
+//
+//    public void showSuppliers() throws IOException {
+//        AnchorPane pane = FXMLLoader.load(getClass().getResource("/view/supplier_view.fxml"));
+//        contentArea.getChildren().setAll(pane);
+//    }
 
     public void generateSalesReport() throws JRException {
         JasperReport report = JasperCompileManager.compileReport("src/main/resources/reports/sales_report.jrxml");
@@ -197,7 +202,7 @@ public class AdminDashboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        adminId.setText(String.valueOf(currentUser.getId()));
     }
 
     // --- Image Browse Placeholder ---
@@ -209,7 +214,54 @@ public class AdminDashboardController implements Initializable {
     // --- Product Management Placeholder Methods ---
     public void handleAddProduct(ActionEvent event) {
 
-        new Alert(Alert.AlertType.INFORMATION, "Add Product functionality pending").show();
+        String txtIDText = txtID.getText();
+        String txtNameText = txtName.getText();
+        String txtCategoryText = txtCategory.getText();
+        String txtColorText = txtColor.getText();
+        String txtSizeText = txtSize.getText();
+        String txtQtyText = txtQty.getText();
+        String txtCostPriceText = txtCostPrice.getText();
+        String txtSellingPriceText = txtSellingPrice.getText();
+        String txtSupplierText = txtSupplier.getText();
+        String txtAddedDateText = txtAddedDate.getValue().toString();
+        String txtDescriptionText = txtDescription.getText();
+        String txtImagePathText = txtImagePath.getText();
+
+        ProductDTO productDTO = null;
+        try {
+            Integer id = Integer.valueOf(txtIDText);
+            String name = txtNameText;
+            String category = txtCategoryText;
+            String color = txtColorText;
+            String size = txtSizeText;
+            Integer qty = Integer.valueOf(txtQtyText);
+            Double costPrice = Double.valueOf(txtCostPriceText);
+            Double sellingPrice = Double.valueOf(txtSellingPriceText);
+            Integer supplier = Integer.valueOf(txtSupplierText);
+            LocalDate addedDate = LocalDate.parse(txtAddedDateText);
+            String description = txtDescriptionText;
+            String image = txtImagePathText;
+
+            productDTO = new ProductDTO(
+                    id, name, category, color, size,image,
+                    qty, costPrice, sellingPrice, supplier,
+                    addedDate, description
+            );
+
+
+        } catch (NumberFormatException e) {
+            System.out.println("Number format error: " + e.getMessage());
+        } catch (DateTimeParseException e) {
+            System.out.println("Date format error: " + e.getMessage());
+        }
+        Boolean saved = productService.save(productDTO);
+        if (saved){
+            new Alert(Alert.AlertType.INFORMATION, "Product Added ").show();
+        }else{
+            new Alert(Alert.AlertType.ERROR, "Product not Added ").show();
+        }
+
+
     }
 
     public void handleUpdateProduct(ActionEvent event) {
@@ -266,5 +318,44 @@ public class AdminDashboardController implements Initializable {
     }
 
     public void handleAddSupplier(ActionEvent event) {
+    }
+
+    public void btnUpdateProfile(ActionEvent actionEvent) {
+        String adminIdText = adminId.getText();
+        String adminNameText = adminName.getText();
+        String adminPasswordText = adminPassword.getText();
+        String confirmPasswordText = adminConfirmPassword.getText();
+
+        if (adminIdText == null || adminIdText.isEmpty() ||
+                adminNameText == null || adminNameText.isEmpty() ||
+                adminPasswordText == null || adminPasswordText.isEmpty() ||
+                confirmPasswordText == null || confirmPasswordText.isEmpty()) {
+
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Validation Error");
+            alert.setHeaderText(null);
+            alert.setContentText("All fields are required.");
+            alert.showAndWait();
+
+        } else {
+            if (adminPasswordText.equals(confirmPasswordText)) {
+                EmployeeDTO employeeDTO = new EmployeeDTO(Integer.valueOf(adminIdText), adminNameText, currentUser.getEmail(), confirmPasswordText, currentUser.getUser_type());
+                employeeService.update(employeeDTO);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setHeaderText(null);
+                alert.setContentText("EmployeeDTO updated successfully.");
+                alert.showAndWait();
+
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Validation Error");
+                alert.setHeaderText(null);
+                alert.setContentText("Passwords do not match.");
+                alert.showAndWait();
+            }
+        }
+
+
     }
 }

@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -34,7 +35,7 @@
                                 <VBox layoutX="30" layoutY="30" spacing="10">
                                     <HBox spacing="10">
                                         <Label style="-fx-font-weight: bold;" text="ID:" />
-                                        <JFXTextField fx:id="adminId" promptText="Admin ID" />
+                                        <JFXTextField fx:id="adminId" editable="false" promptText="Admin ID" />
                                     </HBox>
                                     <HBox spacing="10">
                                         <Label style="-fx-font-weight: bold;" text="Name:" />
@@ -52,7 +53,7 @@
                                         <Label style="-fx-font-weight: bold;" text="Confirm Password:" />
                                         <JFXPasswordField fx:id="adminConfirmPassword" promptText="Confirm Password" />
                                     </HBox>
-                                    <JFXButton style="-fx-background-color: #007bff; -fx-text-fill: white;" text="Update Profile" />
+                                    <JFXButton onAction="#btnUpdateProfile" style="-fx-background-color: #007bff; -fx-text-fill: white;" text="Update Profile" />
                                 </VBox>
                             </children>
                         </AnchorPane>
@@ -74,7 +75,7 @@
                                     <JFXTextField fx:id="txtCostPrice" promptText="Cost Price" />
                                     <JFXTextField fx:id="txtSellingPrice" promptText="Selling Price" />
                                     <JFXTextField fx:id="txtSupplier" promptText="Supplier" />
-                                    <JFXTextField fx:id="txtAddedDate" promptText="Added Date (YYYY-MM-DD)" />
+                           <DatePicker fx:id="txtAddedDate" prefHeight="30.0" prefWidth="300.0" />
                                     <JFXTextArea fx:id="txtDescription" prefHeight="60" promptText="Description" />
                                     <HBox spacing="10">
                                         <JFXTextField fx:id="txtImagePath" promptText="Image Path" />

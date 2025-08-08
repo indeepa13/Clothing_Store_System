@@ -16,6 +16,7 @@ import model.dto.EmployeeDTO;
 import service.ServiceFactory;
 import service.custom.EmployeeService;
 import util.ServiceType;
+import util.Session;
 
 import java.io.IOException;
 import java.net.URL;
@@ -54,6 +55,7 @@ public class  AdminLogin implements Initializable {
         EmployeeDTO employeeDTO = employeeService.searchByUsername(email);
 
         if (employeeDTO.getPassword().equals(password)) {
+            Session.getInstance().setCurrentUser(employeeDTO);// set current user for login
             Parent root = FXMLLoader.load(getClass().getResource("/view/admin_dashboard.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));

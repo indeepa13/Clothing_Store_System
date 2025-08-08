@@ -1,7 +1,7 @@
 package repository.custom;
 
-import model.entity.EmployeeEntity;
+import model.entity.EmployeeDTO;
 import repository.CrudRepository;
 
-public interface UserDAO extends CrudRepository<EmployeeEntity,String> {
+public interface UserDAO extends CrudRepository<EmployeeDTO,String> {
 }

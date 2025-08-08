@@ -1,17 +1,14 @@
 package repository.custom;
 
-import model.dto.EmployeeDTO;
-import model.entity.EmployeeEntity;
+import model.entity.EmployeeDTO;
 import repository.CrudRepository;
 
-import java.util.List;
-
-public interface EmployeeDAO extends CrudRepository<EmployeeEntity,String> {
+public interface EmployeeDAO extends CrudRepository<EmployeeDTO,Integer> {
 
 //    void save(EmployeeEntity entity);
 //    boolean update(EmployeeEntity entity);
 //    boolean deleteById(String id);
 //    List<EmployeeEntity> findAll();
-    EmployeeEntity searchByUsername(String username);
+    EmployeeDTO searchByUsername(String username);
 
 }

@@ -3,30 +3,33 @@ package repository;
 import repository.custom.impl.EmployeeRepositoryImpl;
 import repository.custom.impl.ProductRepositoryImpl;
 import repository.custom.impl.UserRepositoryImpl;
-import repository.custom.impl.EmployeeRepositoryImpl;
-import repository.custom.impl.ProductRepositoryImpl;
-import repository.custom.impl.UserRepositoryImpl;
-
-
-import static org.apache.logging.log4j.Level.CATEGORY;
-import static org.apache.poi.ss.formula.functions.AggregateFunction.PRODUCT;
-import static util.ServiceType.EMPLOYEE;
+import util.RepositoryType;
 
 public class DaoFactory {
     private static DaoFactory instance;
-    private DaoFactory(){}
 
-    public static DaoFactory getInstance(){
-        return instance==null?instance=new DaoFactory():instance;
+    private DaoFactory() {
     }
-    public <T extends SuperRepository, RepositoryType> T getRepositoryType(RepositoryType type){
-        if (type.equals(EMPLOYEE)) {
-            return (T) new EmployeeRepositoryImpl();
-        } else if (type.equals(PRODUCT)) {
-            return (T) new ProductRepositoryImpl();
-        } else if (type.equals(CATEGORY)) {
-            return (T) new UserRepositoryImpl();
+
+    public static DaoFactory getInstance() {
+        if (instance == null) {
+            instance = new DaoFactory();
         }
-        return null;
+        return instance;
     }
+
+    public <T extends SuperRepository> T getRepositoryType(RepositoryType type) {
+        switch (type) {
+            case EMPLOYEE:
+                return (T) new EmployeeRepositoryImpl();
+            case PRODUCT:
+                return (T) new ProductRepositoryImpl();
+            case CATEGORY:
+            case USER:
+                return (T) new UserRepositoryImpl();
+            default:
+                return null;
+        }
+    }
+
 }

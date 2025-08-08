@@ -1,7 +1,6 @@
 package service.custom.impl;
 
-import model.dto.EmployeeDTO;
-import model.entity.EmployeeEntity;
+import model.entity.EmployeeDTO;
 import org.modelmapper.ModelMapper;
 import repository.custom.EmployeeDAO;
 import repository.custom.impl.EmployeeRepositoryImpl;
@@ -17,9 +16,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     private final ModelMapper mapper = new ModelMapper();
 
     @Override
-    public EmployeeDTO searchById(Integer id) {
+    public model.dto.EmployeeDTO searchById(Integer id) {
         try {
-            return mapper.map(employeeDAO.searchById(id), EmployeeDTO.class);
+            return mapper.map(employeeDAO.searchById(id), model.dto.EmployeeDTO.class);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -27,29 +26,29 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void save(EmployeeDTO dto) {
-        employeeDAO.save(mapper.map(dto, EmployeeEntity.class));
+    public Boolean save(model.dto.EmployeeDTO dto) {
+        return employeeDAO.save(mapper.map(dto, EmployeeDTO.class));
     }
 
     @Override
-    public void update(EmployeeDTO dto) {
-        employeeDAO.update(mapper.map(dto, EmployeeEntity.class));
+    public void update(model.dto.EmployeeDTO dto) {
+        employeeDAO.update(mapper.map(dto, EmployeeDTO.class));
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(Integer id) {
         employeeDAO.deleteById(id);
     }
 
     @Override
-    public List<EmployeeDTO> getAll() {
+    public List<model.dto.EmployeeDTO> getAll() {
         return employeeDAO.getAll().stream()
-                .map(entity -> mapper.map(entity, EmployeeDTO.class))
+                .map(entity -> mapper.map(entity, model.dto.EmployeeDTO.class))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public EmployeeDTO searchByUsername(String username) {
-        return mapper.map(employeeDAO.searchByUsername(username), EmployeeDTO.class);
+    public model.dto.EmployeeDTO searchByUsername(String username) {
+        return mapper.map(employeeDAO.searchByUsername(username), model.dto.EmployeeDTO.class);
     }
 }

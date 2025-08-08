@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ProductServiceImpl implements ProductService {
-    private final ProductDAO productDAO = DaoFactory.getInstance().getRepositoryType(RepositoryType.PRODUCT);
+    ProductDAO productDAO = DaoFactory.getInstance().getRepositoryType(RepositoryType.PRODUCT);
     private final ModelMapper mapper = new ModelMapper();
 
     @Override
@@ -23,8 +23,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void save(ProductDTO dto) {
-        productDAO.save(mapper.map(dto, ProductEntity.class));
+    public Boolean save(ProductDTO dto) {
+        return productDAO.save(mapper.map(dto, ProductEntity.class));
     }
 
     @Override
@@ -34,7 +34,7 @@ public class ProductServiceImpl implements ProductService {
 
 
     @Override
-    public void delete(String id) {
+    public void delete(Integer id) {
         productDAO.deleteById(id);
     }
 }

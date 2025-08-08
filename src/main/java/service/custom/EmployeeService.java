@@ -12,9 +12,9 @@ public interface EmployeeService extends SuperService {
 //    Boolean updateEmployee(Employee employee);
 //
     EmployeeDTO searchById(Integer id);
-    void save(EmployeeDTO dto);
+    Boolean save(EmployeeDTO dto);
     void update(EmployeeDTO dto);
-    void delete(String id);
+    void delete(Integer id);
     List<EmployeeDTO> getAll();
     EmployeeDTO searchByUsername(String username);
 }

@@ -39,7 +39,7 @@ public class ProductRepositoryImpl implements ProductDAO {
     }
 
     @Override
-    public boolean deleteById(String s) {
+    public boolean deleteById(Integer s) {
         return false;
     }
 

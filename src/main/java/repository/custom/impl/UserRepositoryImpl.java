@@ -1,13 +1,5 @@
 package repository.custom.impl;
 
-import model.entity.EmployeeEntity;
-import repository.custom.UserDAO;
-import util.CrudUtil;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
-
 public class UserRepositoryImpl  {
 //    @Override
 //    public boolean save(EmployeeEntity entity) {

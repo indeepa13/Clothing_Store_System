@@ -2,13 +2,13 @@ package model.entity;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Setter
 @Getter
 @Entity
@@ -25,8 +25,8 @@ public class ProductEntity {
     private Integer qty;
     private Double cost_price;
     private Double selling_price;
-    private String supplier;
-    private String added_date;
+    private Integer supplier;
+    private LocalDate added_date;
     private String description;
 
 

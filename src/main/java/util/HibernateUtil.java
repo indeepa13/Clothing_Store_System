@@ -1,25 +1,34 @@
 package util;
 
+import model.entity.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 public class HibernateUtil {
-    private static final SessionFactory sessionFactory = buildSessionFactory();
+    private static SessionFactory session = getSessionFactory();
 
-    private static SessionFactory buildSessionFactory() {
-        try {
-            return new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
-        } catch (Throwable ex) {
-            throw new ExceptionInInitializerError("Initial SessionFactory creation failed: " + ex);
-        }
+    public static org.hibernate.SessionFactory getSessionFactory() {
+        StandardServiceRegistry build = new StandardServiceRegistryBuilder()
+                .configure("hibernate.cfg.xml")
+                .build();
+
+        Metadata metadata = new MetadataSources(build)
+                .addAnnotatedClass(CategoryEntity.class)
+                .addAnnotatedClass(EmployeeEntity.class)
+                .addAnnotatedClass(ProductEntity.class)
+                .addAnnotatedClass(UserEntity.class)
+                .getMetadataBuilder()
+                .applyImplicitNamingStrategy(ImplicitNamingStrategyJpaCompliantImpl.INSTANCE)
+                .build();
+
+        return metadata.getSessionFactoryBuilder().build();
     }
-
-    public static SessionFactory getSessionFactory() {
-        return sessionFactory;
-    }
-
     public static Session getSession() {
-        return getSessionFactory().openSession();
+        return session.openSession();
     }
 }

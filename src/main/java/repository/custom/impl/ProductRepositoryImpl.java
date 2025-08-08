@@ -13,6 +13,11 @@ import java.util.List;
 public class ProductRepositoryImpl implements ProductDAO {
 
     @Override
+    public boolean add(ProductEntity entity) {
+        return false;
+    }
+
+    @Override
     public boolean save(ProductEntity entity) {
         try (Session session = HibernateUtil.getSession()) {
             Transaction transaction = session.beginTransaction();

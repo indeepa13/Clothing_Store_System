@@ -1,14 +1,10 @@
 package repository.custom;
 
-import model.entity.EmployeeDTO;
+import model.entity.EmployeeEntity;
+//import repository.CrudDAO;
 import repository.CrudRepository;
 
-public interface EmployeeDAO extends CrudRepository<EmployeeDTO,Integer> {
+public interface EmployeeDAO extends CrudRepository<EmployeeEntity, Integer> {
 
-//    void save(EmployeeEntity entity);
-//    boolean update(EmployeeEntity entity);
-//    boolean deleteById(String id);
-//    List<EmployeeEntity> findAll();
-    EmployeeDTO searchByUsername(String username);
-
+    // Any custom Employee queries can be added here
 }

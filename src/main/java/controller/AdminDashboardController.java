@@ -6,7 +6,6 @@ import com.jfoenix.controls.JFXTextField;
 import db.DBConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
@@ -19,14 +18,12 @@ import model.dto.ProductDTO;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.view.JasperViewer;
 import service.ServiceFactory;
-import service.SuperService;
 import service.custom.ProductService;
 import service.custom.impl.EmployeeServiceImpl;
 import util.ServiceType;
 import util.Session;
 //import service.custom.impl.SupplierServiceImpl;
 
-import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -265,19 +262,67 @@ public class AdminDashboardController implements Initializable {
     }
 
     public void handleUpdateProduct(ActionEvent event) {
+        try {
+            Integer id = Integer.valueOf(txtID.getText());
+            String name = txtName.getText();
+            String category = txtCategory.getText();
+            String color = txtColor.getText();
+            String size = txtSize.getText();
+            Integer qty = Integer.valueOf(txtQty.getText());
+            Double costPrice = Double.valueOf(txtCostPrice.getText());
+            Double sellingPrice = Double.valueOf(txtSellingPrice.getText());
+            Integer supplier = Integer.valueOf(txtSupplier.getText());
+            LocalDate addedDate = txtAddedDate.getValue();
+            String description = txtDescription.getText();
+            String image = txtImagePath.getText();
 
-        String name = txtName.getText();
-       // service.update();
-        new Alert(Alert.AlertType.INFORMATION, "Update Product functionality pending").show();
+            ProductDTO dto = new ProductDTO(id, name, category, color, size, image, qty, costPrice, sellingPrice, supplier, addedDate, description);
+
+            boolean updated = productService.update(dto);
+            if (updated) {
+                new Alert(Alert.AlertType.INFORMATION, "Product updated successfully").show();
+                loadProducts();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Product update failed").show();
+            }
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, "Invalid input: " + e.getMessage()).show();
+        }
     }
 
     public void handleDeleteProduct(ActionEvent event) {
-        new Alert(Alert.AlertType.INFORMATION, "Delete Product functionality pending").show();
+        try {
+            Integer id = Integer.valueOf(txtID.getText());
+            boolean deleted = productService.deleteById(id);
+            if (deleted) {
+                new Alert(Alert.AlertType.INFORMATION, "Product deleted successfully").show();
+                loadProducts();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Product delete failed").show();
+            }
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, "Invalid Product ID").show();
+        }
+    }
+
+    private void loadProducts() {
     }
 
     public void handleClearForm(ActionEvent event) {
-        new Alert(Alert.AlertType.INFORMATION, "Clear Product Form functionality pending").show();
+        txtID.clear();
+        txtName.clear();
+        txtCategory.clear();
+        txtColor.clear();
+        txtSize.clear();
+        txtQty.clear();
+        txtCostPrice.clear();
+        txtSellingPrice.clear();
+        txtSupplier.clear();
+        txtAddedDate.setValue(null);
+        txtDescription.clear();
+        txtImagePath.clear();
     }
+
 
     // --- Supplier Management Placeholder Methods ---
 //    public void handleAddSupplier(ActionEvent event) {
@@ -286,39 +331,149 @@ public class AdminDashboardController implements Initializable {
 //        new Alert(Alert.AlertType.INFORMATION, "Supplier added successfully").show();
 //    }
 
-    public void handleUpdateSupplier(ActionEvent event) {
-        new Alert(Alert.AlertType.INFORMATION, "Update Supplier functionality pending").show();
-    }
-
-    public void handleDeleteSupplier(ActionEvent event) {
-        new Alert(Alert.AlertType.INFORMATION, "Delete Supplier functionality pending").show();
-    }
+//    public void handleAddSupplier(ActionEvent event) {
+//        try {
+//            Integer id = Integer.valueOf(supId.getText());
+//            String name = supName.getText();
+//            String company = supCompany.getText();
+//            String email = supEmail.getText();
+//            String contact = supContact.getText();
+//
+//            SupplierDTO dto = new SupplierDTO(id, name, company, email, contact);
+//            boolean saved = supplierService.save(dto);
+//
+//            if (saved) {
+//                new Alert(Alert.AlertType.INFORMATION, "Supplier added successfully").show();
+//                loadSuppliers();
+//            } else {
+//                new Alert(Alert.AlertType.ERROR, "Supplier not added").show();
+//            }
+//        } catch (Exception e) {
+//            new Alert(Alert.AlertType.ERROR, "Invalid input").show();
+//        }
+//    }
+//
+//    public void handleUpdateSupplier(ActionEvent event) {
+//        try {
+//            Integer id = Integer.valueOf(supId.getText());
+//            String name = supName.getText();
+//            String company = supCompany.getText();
+//            String email = supEmail.getText();
+//            String contact = supContact.getText();
+//
+//            SupplierDTO dto = new SupplierDTO(id, name, company, email, contact);
+//            boolean updated = supplierService.update(dto);
+//
+//            if (updated) {
+//                new Alert(Alert.AlertType.INFORMATION, "Supplier updated successfully").show();
+//                loadSuppliers();
+//            } else {
+//                new Alert(Alert.AlertType.ERROR, "Supplier update failed").show();
+//            }
+//        } catch (Exception e) {
+//            new Alert(Alert.AlertType.ERROR, "Invalid input").show();
+//        }
+//    }
+//
+//    public void handleDeleteSupplier(ActionEvent event) {
+//        try {
+//            Integer id = Integer.valueOf(supId.getText());
+//            boolean deleted = supplierService.deleteById(id);
+//
+//            if (deleted) {
+//                new Alert(Alert.AlertType.INFORMATION, "Supplier deleted successfully").show();
+//                loadSuppliers();
+//            } else {
+//                new Alert(Alert.AlertType.ERROR, "Supplier delete failed").show();
+//            }
+//        } catch (Exception e) {
+//            new Alert(Alert.AlertType.ERROR, "Invalid Supplier ID").show();
+//        }
+//    }
 
     public void handleClearSupplierForm(ActionEvent event) {
-        new Alert(Alert.AlertType.INFORMATION, "Clear Supplier Form functionality pending").show();
+        supId.clear();
+        supName.clear();
+        supCompany.clear();
+        supEmail.clear();
+        supContact.clear();
     }
 
-    // --- Employee Management Placeholder Methods ---
+
     public void handleAddEmployee(ActionEvent event) {
-        EmployeeDTO dto = new EmployeeDTO(1000, "John Doe", "john@example.com", "1234", "EMPLOYEE");
-        employeeService.save(dto);
-        new Alert(Alert.AlertType.INFORMATION, "Employee added successfully").show();
+        try {
+            Integer id = Integer.valueOf(empId.getText());
+            String name = empName.getText();
+            String email = empEmail.getText();
+            String password = empPassword.getText();
+            String role = empRole.getText();
+
+            EmployeeDTO dto = new EmployeeDTO(id, name, email, password, role);
+            boolean saved = employeeService.save(dto);
+
+            if (saved) {
+                new Alert(Alert.AlertType.INFORMATION, "Employee added successfully").show();
+                loadEmployees();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Employee not added").show();
+            }
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, "Invalid input: " + e.getMessage()).show();
+        }
     }
 
     public void handleUpdateEmployee(ActionEvent event) {
-        new Alert(Alert.AlertType.INFORMATION, "Update Employee functionality pending").show();
+        try {
+            Integer id = Integer.valueOf(empId.getText());
+            String name = empName.getText();
+            String email = empEmail.getText();
+            String password = empPassword.getText();
+            String role = empRole.getText();
+
+            EmployeeDTO dto = new EmployeeDTO(id, name, email, password, role);
+            boolean updated = employeeService.update(dto);
+
+            if (updated) {
+                new Alert(Alert.AlertType.INFORMATION, "Employee updated successfully").show();
+                loadEmployees();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Employee update failed").show();
+            }
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, "Invalid input").show();
+        }
     }
 
     public void handleDeleteEmployee(ActionEvent event) {
-        new Alert(Alert.AlertType.INFORMATION, "Delete Employee functionality pending").show();
+        try {
+            Integer id = Integer.valueOf(empId.getText());
+            boolean deleted = employeeService.deleteById(id);
+
+            if (deleted) {
+                new Alert(Alert.AlertType.INFORMATION, "Employee deleted successfully").show();
+                loadEmployees();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Employee delete failed").show();
+            }
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, "Invalid Employee ID").show();
+        }
+    }
+
+    private void loadEmployees() {
+
     }
 
     public void handleClearEmployeeForm(ActionEvent event) {
-        new Alert(Alert.AlertType.INFORMATION, "Clear Employee Form functionality pending").show();
+        empId.clear();
+        empName.clear();
+        empEmail.clear();
+        empPassword.clear();
+        empRole.clear();
     }
 
-    public void handleAddSupplier(ActionEvent event) {
-    }
+
+
 
     public void btnUpdateProfile(ActionEvent actionEvent) {
         String adminIdText = adminId.getText();

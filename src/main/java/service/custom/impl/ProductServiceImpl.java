@@ -4,16 +4,40 @@ import model.dto.ProductDTO;
 import model.entity.ProductEntity;
 import org.modelmapper.ModelMapper;
 import repository.DaoFactory;
+
 import repository.custom.ProductDAO;
 import service.custom.ProductService;
 import util.RepositoryType;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class ProductServiceImpl implements ProductService {
-    ProductDAO productDAO = DaoFactory.getInstance().getRepositoryType(RepositoryType.PRODUCT);
-    private final ModelMapper mapper = new ModelMapper();
+
+    ProductDAO productDAO = DaoFactory.getInstance().getRepositoryType(util.RepositoryType.PRODUCT);
+    ModelMapper mapper = new ModelMapper();
+
+    @Override
+    public boolean save(ProductDTO dto) {
+        return productDAO.add(mapper.map(dto, ProductEntity.class));
+    }
+
+    @Override
+    public boolean update(ProductDTO dto) {
+        return productDAO.update(mapper.map(dto, ProductEntity.class));
+    }
+
+    @Override
+    public boolean deleteById(Integer id) {
+        return productDAO.deleteById(id);
+    }
+
+    @Override
+    public ProductDTO searchById(Integer id) throws SQLException {
+        ProductEntity entity = productDAO.searchById(id);
+        return entity != null ? mapper.map(entity, ProductDTO.class) : null;
+    }
 
     @Override
     public List<ProductDTO> getAll() {
@@ -23,18 +47,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Boolean save(ProductDTO dto) {
-        return productDAO.save(mapper.map(dto, ProductEntity.class));
+    public boolean add(ProductDTO dto) {
+        return false;
     }
 
-    @Override
-    public void update(ProductDTO dto) {
-        productDAO.update(mapper.map(dto, ProductEntity.class));
-    }
-
-
-    @Override
-    public void delete(Integer id) {
-        productDAO.deleteById(id);
-    }
 }
+

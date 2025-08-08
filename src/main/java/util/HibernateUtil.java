@@ -1,5 +1,6 @@
 package util;
 
+import model.dto.EmployeeDTO;
 import model.entity.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
